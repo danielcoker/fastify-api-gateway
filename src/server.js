@@ -15,7 +15,7 @@ const fastify = Fastify({
 
 // Register one wildcard route per service prefix
 for (const { prefix, upstream } of routes) {
-  const wildcardPath = `${prefix}/*`;
+  const wildcardPath = `${prefix}/*path`;
   const handler = createProxyHandler(upstream);
 
   fastify.route({ method: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD"], url: wildcardPath, handler });
