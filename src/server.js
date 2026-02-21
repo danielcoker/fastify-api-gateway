@@ -30,7 +30,6 @@ fastify.setNotFoundHandler((req, reply) => {
 
 // Startup
 try {
-  console.log("Routes: ", fastify.printRoutes())
   await fastify.listen({ port: PORT, host: HOST });
   fastify.log.info(`[gateway] env=${activeEnv} listening on ${HOST}:${PORT}`);
 } catch (err) {
