@@ -4,9 +4,10 @@ import { request } from "undici";
  * Builds a Fastify route handler that proxies to the given upstream.
  * The prefix is already stripped from req.url by the time we get here.
  */
-export function createProxyHandler(upstream) {
+export function createProxyHandler(upstream, prefix) {
   return async function proxyHandler(req, reply) {
-    const targetUrl = upstream + req.url;
+    const strippedPath = req.url.slice(prefix.length) || "/";
+    const targetUrl = upstream + strippedPath;
 
     // Copy incoming headers, replace host with the upstream host
     const headers = Object.assign({}, req.headers);

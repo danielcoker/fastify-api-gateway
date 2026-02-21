@@ -15,8 +15,8 @@ const fastify = Fastify({
 
 // Register one wildcard route per service prefix
 for (const { prefix, upstream } of routes) {
-  const wildcardPath = `${prefix}/*path`;
-  const handler = createProxyHandler(upstream);
+  const wildcardPath = `${prefix}/*`;
+  const handler = createProxyHandler(upstream, prefix);
 
   fastify.route({ method: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD"], url: wildcardPath, handler });
 
@@ -30,6 +30,7 @@ fastify.setNotFoundHandler((req, reply) => {
 
 // Startup
 try {
+  console.log("Routes: ", fastify.printRoutes())
   await fastify.listen({ port: PORT, host: HOST });
   fastify.log.info(`[gateway] env=${activeEnv} listening on ${HOST}:${PORT}`);
 } catch (err) {
