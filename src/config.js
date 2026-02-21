@@ -1,10 +1,10 @@
 const environments = {
   production: [
-    { prefix: "/afmauth", upstream: "http://afmauth-service-production:3000" },
+    { prefix: "/afmauth", upstream: "http://afmauth-production:3000" },
   ],
 
   staging: [
-    { prefix: "/afmauth", upstream: "http://afmauth-service-staging:3000" },
+    { prefix: "/afmauth", upstream: "http://afmauth-staging:3000" },
   ],
 };
 
